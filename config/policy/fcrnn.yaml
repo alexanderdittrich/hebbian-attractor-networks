@@ -1,0 +1,6 @@
+hidden_neurons: 0
+
+weights_init: "uniform_-0.1_0.1"
+state_init: "zeros"
+hidden_activation: "tanh"
+use_bias: true

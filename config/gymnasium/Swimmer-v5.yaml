@@ -1,0 +1,10 @@
+# Simulator setting
+frame_skip: 4
+
+# Reward parameters
+forward_reward_weight: 1.0
+ctrl_cost_weight: 0.0001
+
+# General parameters
+reset_noise_scale: 0.1
+exclude_current_positions_from_observation: true

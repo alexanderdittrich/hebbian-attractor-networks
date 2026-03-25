@@ -1,0 +1,12 @@
+ctrl_dt: 0.05
+sim_dt: 0.01
+episode_length: 1000
+action_repeat: 1
+vision: False
+reset_noise_scale: 0.1
+exclude_current_positions_from_observation: true
+
+reward_config:
+  healthy_reward_weight: 1.0
+  forward_reward_weight: 1.0
+  control_cost_weight: 0.5

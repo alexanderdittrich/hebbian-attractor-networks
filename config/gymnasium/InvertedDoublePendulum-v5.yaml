@@ -1,0 +1,8 @@
+# Simulator setting
+frame_skip: 5
+
+# Reward parameters
+healthy_reward: 10.0
+
+# General parameters
+reset_noise_scale: 0.1

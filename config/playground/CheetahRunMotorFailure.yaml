@@ -1,0 +1,10 @@
+ctrl_dt: 0.01
+sim_dt: 0.005
+episode_length: 1000
+action_repeat: 1
+vision: False
+
+num_failures: 1
+wait_duration:
+- 450
+- 550

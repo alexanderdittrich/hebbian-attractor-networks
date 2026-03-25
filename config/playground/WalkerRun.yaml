@@ -1,0 +1,5 @@
+ctrl_dt: 0.025
+sim_dt: 0.0025
+episode_length: 1000
+action_repeat: 1
+vision: False

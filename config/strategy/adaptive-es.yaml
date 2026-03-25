@@ -1,0 +1,7 @@
+population_size: 256
+elite_ratio: 0.1
+sigma_init: 0.5
+c_m: 1.0
+c_sigma: 0.1
+clip_min: -100000000.0
+clip_max: 100000000.0

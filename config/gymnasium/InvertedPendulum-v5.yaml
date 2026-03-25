@@ -1,0 +1,5 @@
+# Simulator setting
+frame_skip: 25
+
+# General parameters
+reset_noise_scale: 0.01

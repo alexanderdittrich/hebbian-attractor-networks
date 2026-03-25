@@ -1,0 +1,49 @@
+ctrl_dt: 0.02
+sim_dt: 0.004
+episode_length: 1000
+Kp: 35.0
+Kd: 0.5
+action_repeat: 1
+action_scale: 0.5
+history_len: 1
+soft_joint_pos_limit_factor: 0.95
+
+noise_config: 
+  level: 0.0  # Set to 0.0 to disable noise.
+  scales: 
+    joint_pos: 0.03
+    joint_vel: 1.5
+    gyro: 0.2
+    gravity: 0.05
+    linvel: 0.1
+
+pert_config:
+  exclude_RL_leg: true
+  wait_duration:
+  - 3.0
+  - 5.0
+
+reward_config:
+  max_foot_height: 0.1
+  scales:
+    global_vel_x: 1.0
+    local_yaw: 0.2
+    action_rate: -0.01
+    ang_vel_xy: -0.05
+    dof_pos_limits: -1.0
+    energy: -0.001
+    feet_air_time: 0.1
+    feet_clearance: -2.0
+    feet_height: -0.2
+    feet_slip: -0.1
+    lin_vel_z: -0.5
+    orientation: -5.0
+    pose: 0.5
+    stand_still: -0.1
+    termination: -0.1
+    torques: -0.0002
+    tracking_ang_vel: 0.5
+    tracking_lin_vel: 1.0
+  target_x_vel: 2.0
+  target_y_vel: 0.0
+  tracking_sigma: 0.25

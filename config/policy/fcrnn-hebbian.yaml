@@ -1,0 +1,17 @@
+hidden_neurons: 0
+weights_init: "uniform_-0.1_0.1"
+state_init: "zeros"
+hidden_activation: "tanh"
+
+# learning rule config
+learning_rule_cls: "eta-abcd"
+learning_rule_cfg:
+  coeff_init: "uniform_-1.0_1.0"
+  regularizer: "abs-scale"
+  # learning_rate: 0.1 # unsed for eta learning rules
+
+# "exponential-moving-average" or "moving-average"
+activation_buffer_cls: "direct" 
+# activation_buffer_cfg:
+#   window_size: 10
+#   alpha: 0.1

@@ -1,0 +1,49 @@
+defaults:
+  - policy: mlp-hebbian
+  - strategy: openai-es
+  - gymnasium: HalfCheetah-v5
+  - _self_
+
+# Suppress auto export
+hydra:  
+  verbose: false
+  output_subdir: null  
+  run:  
+    dir: .
+  job_logging:
+    root:
+      level: WARNING  # Set this to ERROR to reduce even more logs
+
+# Performance related settings
+repeats: 4
+num_generations: 1000
+episode_length: 1000
+# step_interval is defined in corresponding environment
+update_interval: null # extract update from environment
+center_fitness: false
+seed: 161
+weight_reset: false
+parameter_bounds: 
+- -10000000.0
+- 10000000.0
+ignore_terminations: true
+warmstart: false
+
+# General training settings (non-performance related)
+multithreading: false
+
+# Checkpointing settings
+checkpoint_directory: /tmp/
+checkpoint_interval: 0 # set > 0 to activate model saving
+checkpoint_elites: null # set null for entire population
+
+# Status logging
+generation_progress_bar: true
+episode_progress_bar: false
+verbose: false
+
+# Logging settings
+wandb: true
+wandb_project: "learning"
+wandb_entity: "tensegrity"
+

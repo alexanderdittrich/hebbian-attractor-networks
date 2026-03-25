@@ -1,0 +1,7 @@
+population_size: 128
+elite_ratio: 0.2
+sigma_schedule: "exponential_decay"
+sigma_cfg:
+  init_value: 0.5
+  transition_steps: 1000 
+  decay_rate: 0.99

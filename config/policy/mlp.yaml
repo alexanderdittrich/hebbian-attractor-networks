@@ -1,0 +1,8 @@
+# Multi-layer perceptron (MLP) model configuration
+hidden_dims:
+- 80
+weights_init: "uniform_-0.1_0.1"
+bias_init: "uniform_-0.1_0.1"
+hidden_activation: "tanh"
+output_activation: "tanh"
+use_bias: false

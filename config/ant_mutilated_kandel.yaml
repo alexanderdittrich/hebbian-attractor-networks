@@ -1,0 +1,69 @@
+defaults:
+  - policy: mlp-hebbian
+  - strategy: openai-es
+  - _self_
+
+# Suppress auto export
+hydra:
+  verbose: false
+  output_subdir: null
+  run:
+    dir: .
+  job_logging:
+    root:
+      level: WARNING
+
+# Najarro et al. (2020) ant mutilated experiment
+# Train: undamaged + front-right leg damaged (seen during meta-training)
+# Test:  front-left leg damaged (unseen — measures generalisation)
+train_variants:
+  - none
+  - FR
+  - FL
+test_variants:
+  - RR
+  - RL
+eval_test_interval: 50 # evaluate on test variants every N generations
+
+# Environment settings (shared across all variants)
+env:
+  ctrl_dt: 0.05
+  sim_dt: 0.01
+  episode_length: 500
+  action_repeat: 1
+  reset_noise_scale: 0.1
+  exclude_current_positions_from_observation: true
+  reward_config:
+    healthy_reward_weight: 1.0
+    forward_reward_weight: 1.0
+    control_cost_weight: 0.5
+
+# Evolution settings
+num_generations: 1000
+rollout_length: 1000
+repeats: 4
+update_interval: null
+track_terminations: true
+action_clip_min: -1.0
+action_clip_max: 1.0
+generation_reset: true
+agent_seed: 0
+environment_seed: null
+fair_repeats: false
+
+# Checkpointing settings
+checkpoint_directory: /tmp/
+checkpoint_interval: 50 # set > 0 to activate model saving
+checkpoint_elites: 5
+auto_checkpoint: false
+
+# Experiment logging
+wandb: true
+wandb_project: "jewelry"
+wandb_entity: "tensegrity"
+progress_bar: true
+verbose: true
+eval_interval: 0
+
+# Checkpoint loading
+checkpoint_load_path: null

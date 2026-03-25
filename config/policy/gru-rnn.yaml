@@ -1,0 +1,5 @@
+hidden_dim: 16
+weights_init: "uniform_-0.1_0.1"
+state_init: "zeros"
+output_activation: "tanh"
+use_bias: true

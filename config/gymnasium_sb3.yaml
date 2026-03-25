@@ -1,0 +1,47 @@
+# Suppress auto export
+hydra:  
+  verbose: false
+  output_subdir: null  
+  run:  
+    dir: .
+  job_logging:
+    root:
+      level: WARNING  # Set this to ERROR to reduce even more logs
+
+wandb:
+  project: learning
+  entity: tensegrity
+
+policy:
+  type: MlpPolicy
+  net_arch:
+    pi: # Actor layers
+      - 64
+      - 64
+    vf: # Critic layers
+      - 64
+      - 64
+
+algorithm:
+  name: ppo
+  learning_rate: 3e-4
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+  max_grad_norm: 0.5
+  use_sde: false
+  gamma: 0.99
+
+env:
+  name: HalfCheetah-v5
+  num_envs: 32
+  vec_type: "dummy" # "dummy" or "subproc"
+
+ckpt_directory: "/tmp/"
+norm_obs: true
+norm_reward: false
+total_timesteps: 100000000
+seed: 0

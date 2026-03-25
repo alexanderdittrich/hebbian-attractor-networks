@@ -1,0 +1,55 @@
+ctrl_dt: 0.02
+sim_dt: 0.004
+episode_length: 1000
+Kp: 50.0
+Kd: 1.0
+action_repeat: 1
+action_scale: 0.5
+history_len: 1
+soft_joint_pos_limit_factor: 0.95
+
+noise_config: 
+  level: 1.0  # Set to 0.0 to disable noise.
+  scales: 
+    joint_pos: 0.03
+    joint_vel: 1.5
+    gyro: 0.2
+    gravity: 0.05
+    linvel: 0.1
+    linacc: 2.5
+
+reward_config:
+  cmd_x_vel: 2.0
+  cmd_y_vel: 0.0
+  cmd_yaw_vel: 0.0
+  tracking_sigma: 0.25
+  max_foot_height: 0.1
+  scales:
+    # Tracking.
+    tracking_global_linvel_x: 1.0
+    tracking_global_linvel_y: 0.0
+    tracking_yaw: 0.2
+    tracking_lin_vel: 0.0 # removed: -0.1
+    tracking_ang_vel: 0.0 # removed: -0.2
+    # action regularization.
+    action_rate: -0.00 # later: -0.01
+    torques: -0.0000 # later: -0.0002
+    square_torques: -0.0000 # later: -0.0001
+    poly_torques: -0.0 # later: -1.0
+    energy: 0.0 # later: -0.001
+    cfrc_ext: 0.0 # later: -0.001
+    # base rewards.
+    ang_vel_xy: 0.0 # later: -0.05
+    lin_vel_z: -0.00 # later: -0.05
+    orientation: 0.0 # later: 0.0 # later: -5.0
+    # other.
+    dof_pos_limits: 0.0 # later: -1.0
+    pose: 0.0 # later: 0.5
+    # other.
+    stand_still: 0.0 # later: -0.1
+    termination: 0.0 # later: -0.1
+    # feet.
+    feet_air_time: 0.0 # later: 0.1
+    feet_clearance: 0.0 # later: -0.05
+    feet_height: 0.0 # later: -0.2
+    feet_slip: 0.0 # later: -0.1

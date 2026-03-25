@@ -1,0 +1,22 @@
+# Multi-layer perceptron (MLP) model configuration
+hidden_dims:
+- 16
+weights_init: "uniform_-0.1_0.1"
+hidden_activation: "tanh"
+output_activation: "tanh"
+
+# learning rule config
+learning_rule_cls: "eta-abcd"
+learning_rule_cfg:
+  coeff_init: "uniform_-1.0_1.0"
+  regularizer: "abs-scale"
+  # learning_rate: 0.05 # used for non-eta learning rules
+  # trace_decay: 0.9 # used for eligibility trace
+
+# "exponential-moving-average" or "moving-average"
+activation_buffer_cls: "direct"
+# activation_buffer_cfg:
+#  window_size: 20 # required for moving-average
+#   alpha: 0.1 # required for exponential-moving-average
+
+use_bias: false # ensure bias learning rule

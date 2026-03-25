@@ -1,0 +1,46 @@
+defaults:
+  - policy: mlp-hebbian
+  - strategy: openai-es
+  - playground: CheetahRun
+  - _self_
+
+# Suppress auto export
+hydra:  
+  verbose: false
+  output_subdir: null  
+  run:  
+    dir: .
+  job_logging:
+    root:
+      level: WARNING  # Set this to ERROR to reduce even more logs
+
+# Evolution settings
+num_generations: 1000
+rollout_length: 1000
+repeats: 4
+update_interval: null
+track_terminations: true
+action_clip_min: -1.0
+action_clip_max: 1.0
+generation_reset: true
+agent_seed: 0
+environment_seed: null # agent and environment seed can be set independently
+fair_repeats: false # TODO
+warm_start: false # TODO
+
+# Checkpointing settings
+checkpoint_directory: /tmp/
+checkpoint_interval: 0 # set > 0 to activate model saving
+checkpoint_elites: 10 # set null for entire population
+auto_checkpoint: false # TODO
+
+# Experiment logging
+wandb: true
+wandb_project: "learning"
+wandb_entity: "tensegrity"
+progress_bar: false
+verbose: true
+eval_interval: 0 # TODO
+
+# Checkpoint loading
+checkpoint_load_path: null # TODO

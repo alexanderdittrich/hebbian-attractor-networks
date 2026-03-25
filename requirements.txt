@@ -1,0 +1,17 @@
+evosax
+tqdm
+jax
+flax
+matplotlib
+numpy
+hydra-core
+omegaconf
+scienceplots
+scipy
+gymnasium
+imageio
+orbax-checkpoint
+playground
+dm_control
+ruff
+scikit-learn

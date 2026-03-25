@@ -1,0 +1,82 @@
+defaults:
+  - _self_
+
+# Suppress auto export
+hydra:
+  verbose: false
+  output_subdir: null
+  run:
+    dir: .
+  job_logging:
+    root:
+      level: WARNING
+
+# Najarro et al. (2020) ant mutilated experiment — PPO baseline
+# Train: undamaged + front-right leg damaged (seen during training)
+# Test:  front-left leg damaged (unseen — measures transfer)
+#
+# For multi-variant domain-randomisation training, num_envs and num_eval_envs
+# must each be divisible by len(train_variants).
+train_variants:
+  - none
+  - FR
+  - FL
+test_variants:
+  - RR
+  - RL
+
+# Environment settings (shared across all variants)
+env:
+  ctrl_dt: 0.05
+  sim_dt: 0.01
+  episode_length: 500
+  action_repeat: 1
+  reset_noise_scale: 0.1
+  exclude_current_positions_from_observation: true
+  reward_config:
+    healthy_reward_weight: 1.0
+    forward_reward_weight: 1.0
+    control_cost_weight: 0.5
+
+# PPO hyperparameters
+#
+# Divisibility constraints
+#   num_envs      % len(train_variants) == 0
+#   num_eval_envs % lcm(len(train_variants), len(test_variants)) == 0
+#   (num_envs * unroll_length) % (batch_size * num_minibatches) == 0
+#
+# With train_variants=[none, FR, FL] (n=3) and test_variants=[RR, RL] (n=2):
+#   num_envs      = 1536 = 3 × 512           ✓ divisible by 3
+#   num_eval_envs = 192  = lcm(3,2) × 32     ✓ divisible by 6
+#   1536 × 20 = 30720;  512 × 12 = 6144;  30720 / 6144 = 5 rollout passes/update
+ppo:
+  num_timesteps: 1_000_000_000
+  num_envs: 1536          # 3 × 512 — divisible by len(train_variants)=3
+  num_eval_envs: 192      # lcm(3,2) × 32 — divisible by both train and test n_variants
+  unroll_length: 20
+  batch_size: 512         # 512 × 12 = 6144 divides 1536 × 20 = 30720 → 5 rollout passes
+  num_minibatches: 12
+  num_updates_per_batch: 2    # 4 caused policy collapse; halving gives on-policy margin
+  discounting: 0.97
+  learning_rate: 3.0e-4
+  learning_rate_schedule: "ADAPTIVE_KL"  # required to activate desired_kl; otherwise desired_kl is ignored
+  desired_kl: 0.01            # adaptive LR: halves LR when KL > 2×target, doubles when < 0.5×target
+  entropy_cost: 1.0e-2        # higher entropy regularisation stabilises multi-variant training
+  reward_scaling: 0.1
+  clipping_epsilon: 0.2       # tighter trust region prevents large policy updates
+  normalize_observations: true
+  max_grad_norm: 1.0
+  num_evals: 20
+  policy_hidden_layer_sizes: [256, 256]
+  value_hidden_layer_sizes: [256, 256]
+
+seed: 0
+
+# Checkpointing
+checkpoint_directory: /tmp/
+
+# Experiment logging
+wandb: true
+wandb_project: "learning"
+wandb_entity: "tensegrity"
+verbose: true

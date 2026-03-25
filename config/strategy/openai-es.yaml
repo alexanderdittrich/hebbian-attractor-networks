@@ -1,0 +1,21 @@
+population_size: 512
+optimizer: "adam"
+optimizer_cfg:
+  b1: 0.9
+  b2: 0.999
+  eps: 0.00000001
+
+learning_rate_schedule: "exponential_decay"
+learning_rate_cfg:
+  init_value: 0.1
+  transition_steps: 1000
+  decay_rate: 0.999
+
+sigma_schedule: "exponential_decay"
+sigma_cfg:
+  init_value: 0.2
+  transition_steps: 1000 
+  decay_rate: 0.995
+
+fitness_shaping: "center"
+antithetic: true

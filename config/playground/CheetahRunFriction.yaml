@@ -1,0 +1,11 @@
+ctrl_dt: 0.01
+sim_dt: 0.005
+episode_length: 1000
+action_repeat: 1
+vision: False
+
+min_friction: 0.40
+max_friction: 0.95
+wait_duration:
+- 300
+- 800

@@ -1,0 +1,84 @@
+defaults:
+  - policy: mlp-hebbian
+  - strategy: openai-es
+  - playground: Go1WalkFlatTerrain
+  - _self_
+
+# Suppress auto export
+hydra:  
+  verbose: false
+  output_subdir: null  
+  run:  
+    dir: .
+  job_logging:
+    root:
+      level: WARNING  # Set this to ERROR to reduce even more logs
+
+# Evolution settings
+num_generations: 1000
+rollout_length: 1000
+repeats: 4
+update_interval: null
+track_terminations: false
+action_clip_min: -1.0
+action_clip_max: 1.0
+generation_reset: true
+agent_seed: 0
+environment_seed: null # agent and environment seed can be set independently
+fair_repeats: false # TODO
+warm_start: false # TODO
+
+# Checkpointing settings
+checkpoint_directory: /tmp/
+checkpoint_interval: 0 # set > 0 to activate model saving
+checkpoint_elites: 10 # set null for entire population
+auto_checkpoint: false # TODO
+ckpt_load_dir: null
+ckpt_load_ckpt: null
+ckpt_load_plc_id: 0 # set null for entire population
+
+# Experiment logging
+wandb: true
+wandb_project: "learning"
+wandb_entity: "tensegrity"
+progress_bar: false
+verbose: true
+
+# Evaluation settings
+eval_interval: 20 # Every k generations (0 to disable)
+eval_episodes: 1 # This is overwritten by repeats and population_size
+# since this is pre-init by randomization.
+
+# Domain randomization
+curriculum_window_size: 5 # For reward and randomization override.
+ 
+randomization_threshold: 55.0
+
+reward_override_threshold: 55.0
+# Simple reward structure to kick start locomotion
+# After threshold, playground reward structure.
+reward_override_cfg:
+  tracking_global_linvel_x: 1.0
+  # tracking_global_linvel_y: 0.05
+  tracking_yaw: 0.2
+  tracking_lin_vel: 0.0 # 1.0
+  tracking_ang_vel: 0.0 # 0.5
+  # base.
+  # lin_vel_z: -0.5
+  # ang_vel_xy: -0.1
+  # orientation: -5.0
+  # action regularization.
+  # torques: -0.001
+  # square_torques: -0.0001
+  # poly_torques: -1.2
+  # action_rate: -0.01
+  # energy: -0.001
+  # cfrc_ext: -0.0005
+  # other.
+  # dof_pos_limits: 0.0 # -1.0
+  # pose: 0.0 # 0.5
+  # feet:
+  # feet_air_time: 0.05 # later: 0.1
+  # feet_clearance: -0.025 # later: -0.05
+  # feet_height: -0.1 # later: -0.2
+  # feet_slip: -0.1 # later: -0.1
