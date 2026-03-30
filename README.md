@@ -21,13 +21,22 @@ Hebbian Attractor Networks (HANs) are plastic neural networks that continuously 
 
 <p align="center">
   <img src="docs/cheetah_weight_dynamics.png" width="80%">
+  <br>
+  <em>Analysis of weight dynamics under three Hebbian learning condition</em>
 </p>
 
-https://github.com/user-attachments/assets/03c82ee6-691d-4856-932c-c3d07f87afd4
+### Gymnasium Benchmark
 
+<p align="center">
+  <img src="docs/swimmer.gif" width="20%">
+  <img src="docs/halfcheetah.gif" width="20%">
+  <img src="docs/hopper.gif" width="20%">
+  <img src="docs/walker2d.gif" width="20%">
+  <br>
+  <em>Gymnasium Benchmark tasks with Hebbian Attractor Networks.</em>
+</p>
 
-
-### Attractor Dynamics
+### Attractor Dynamics of Unitree Go1 Locomotion
 <!-- TODO: Add side-by-side GIF/video showing limit-cycle vs fixed-point weight dynamics -->
 <p align="center">
   <img src="docs/quadruped_pca_lca_animation.gif" width="300">
@@ -36,6 +45,10 @@ https://github.com/user-attachments/assets/03c82ee6-691d-4856-932c-c3d07f87afd4
   <em>Left: Limit-cycle attractor (condition B) — weights oscillate in sync with the gait.
   Right: Fixed-point attractor (condition E) — weights converge to a stable configuration.</em>
 </p>
+
+https://github.com/user-attachments/assets/3ee96be8-8955-496c-bd14-c2152eeb023f
+
+https://github.com/user-attachments/assets/03c82ee6-691d-4856-932c-c3d07f87afd4
 
 ## Key Results
 
